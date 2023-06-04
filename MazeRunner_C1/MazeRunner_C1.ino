@@ -77,7 +77,7 @@ char select_turn(char found_left, char found_straight, char found_right)
 // This function is called once.
 void loop() {
 
-    if(OrangutanPushbuttons::isPressed(PORTB5)){
+    if(OrangutanPushbuttons::isPressed(BUTTON_B)){
       OrangutanLCD::clear();
       delay(1000);
         while(1){

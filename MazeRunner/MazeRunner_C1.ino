@@ -1,4 +1,4 @@
-#include <Arduino.h>
+#include "Arduino.h"
 #include <MazeRunner.h>
 #include <OrangutanMotors.h>
 #include <OrangutanLCD.h>
@@ -36,7 +36,7 @@ Turn Speed parameters:
 */
 MazeRunner bot(FORWARD_MEDIUM, TURN_MEDIUM);
 
-unsigned int directions[3];
+int directions[3];
 char path[100] = "";
 char path_length = 0; // the length of the path
 
@@ -68,7 +68,7 @@ char select_turn(char found_left, char found_straight, char found_right)
   else if(found_right) {
     return 'R';
   }
-  //backs
+  //back
   else {
     return 'B';
   }
