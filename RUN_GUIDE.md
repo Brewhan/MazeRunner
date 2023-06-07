@@ -27,6 +27,12 @@
 
 ## Help!
 &nbsp;
+
+## Im missing libraries!
+### If missing, make sure you download the libraries in the Arduino IDE by searching for 3pi in the libraries manager.
+![missing_libraries](/Resources/library.PNG "missing_libraries")
+&nbsp;
+
 ## What Board am I Using?
 ### Selecting the board, the port, and programmer is necessary to get code running on the device. This may already be set up for you, but in case you lose this info, here's the rundown, you are using a Pololu 3pi robot w/ATmega328p, now in case this does not mean anything to you, I have diagrams to help:
 ## Board:
@@ -34,7 +40,7 @@
 &nbsp;
 
 ## What Port Should I Choose?:
-*This is where it can get interesting, usually when we run this, it is COM4, but on some devices this can turn into COM6/COM7/COM8/COM9 etc. - I can only advise you start with COM4 and then experiment to see which one actually works! In this example it is COM8. I know this because it disappears when i unplug the device. When you plug in the device, two extra COM entries will appear in this list. Make sure you choose the first of these two options!*
+*This is where it can get interesting, usually when we run this, it is COM4, but on some devices this can turn into COM6/COM7/COM8/COM9 etc. - I can only advise you start with COM4 and then experiment to see which one actually works! In this example it is COM8. I know this because it disappears when I unplug the device. When you plug in the device, two extra COM entries will appear in this list. Make sure you choose the first of these two options!*
 
 ![port](/Resources/port.PNG "port")
 
