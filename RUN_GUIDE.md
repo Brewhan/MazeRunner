@@ -28,7 +28,7 @@
 ## Help!
 &nbsp;
 
-## Im missing libraries!
+## I'm missing libraries!
 ### If missing, make sure you download the libraries in the Arduino IDE by searching for 3pi in the libraries manager.
 ![missing_libraries](/Resources/library.PNG "missing_libraries")
 &nbsp;
