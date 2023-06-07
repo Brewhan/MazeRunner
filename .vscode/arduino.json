@@ -1,4 +1,4 @@
 {
-    "sketch": "MazeRunner_C1.ino",
+    "sketch": "MazeRunnerBroken.ino",
     "board": "libpololu-arduino:avr:orangutan_328"
 }
