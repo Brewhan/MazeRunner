@@ -3,7 +3,7 @@
 *The Maze Runner Challenge is a set of tasks designed to introduce people to Robotics and  C/C++ and using the Pololu 3pi robot as a platform (as well as the accompanying programmer device). Prior knowlege of programming is reccomended but not essential. If new, documents are written for Arduino IDE, but I have found some success with (and am currently using) VSCode. You will also need a maze, you can create a maze using a very large flat, white, surface (e.g. A2 paper) and some black electrical tape. Make sure the end of the maze is a large block of black tape, as the code will assume the end of a maze is when detecs forward, left, and right as valid directions.  
 
 For inspiration, you can have a look at [this](https://www.youtube.com/watch?v=ZMQbHMgK2rw) video from Veritasium, thes devices won't be as fast as modern micro-mice, but it's a start!
-*
+
 #
 ## Hello engineers and welcome to your first day on the job here at Redacted Robotics!
 
