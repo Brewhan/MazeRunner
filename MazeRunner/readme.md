@@ -24,7 +24,6 @@ To include the library, please include these imports at the top of the file. Als
 Basic Functions
 ---------------
 
-
 ### void setupRobot()
 Initialises the robot for maze solving. The robot will not function correctly without it. It should be called in the setup() function. The code does:
 
@@ -34,15 +33,16 @@ Initialises the robot for maze solving. The robot will not function correctly wi
 - Shows the sensor readings while waiting for B button to be pressed to start the robot.
 - likely more, but it's an ongoing process
 
+
 ### void turn(char direction)
 Turns the robot in the direction specified. Direction must be:
 
 - L (Left)
 - R (Right)
 - B (Rotate 180 degrees)
-- Default is an error, and should play a chirp.
+- Any other character will not turn the robot
 
-### unsigned int straightUntilIntersection()
+### int straightUntilIntersection()
 Will go straight until the robot detects an intersection. It returns a integer of the number of grid squares it has moved. 
 
 ### void getDirectionsAvailable(unsigned int \*direction_array)
@@ -57,11 +57,12 @@ Stops the robot
 ### void complete()
 A simplification of stopping and clearing the lcd display
 
+### void simplify_path(char \*path, int path_length)
+This function contains a strategy that whenever the sensors encounter a sequence x B x, (nothing, back, nothing), we can assume this is a dead end, and we can simplify it by cutting out this sequence.
+
+
 ### void write_simple_path_to_device()
 Will write the given path to the device.
 
-### void setSpeedsFor
+### void setSpeedsFor(int leftMotor, int rightMotor, int delay_ms)
 Will change speed of motors
-
-#
-&copy; Andrew Ramsier 2023
