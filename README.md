@@ -1,6 +1,10 @@
 Maze Runner Library for Arduino
 ========================
 
+Context
+--------------
+Folder in root "Mazeunner" is the directory we are talking about when we talk about "this directory". The other folders are examples of the library being used to program the robot. For reference, I store the actual robot code e.g. the .ino files, in the root Arduino folder e.g. Documents/Arduino/
+
 How to Use
 ---------------
 
