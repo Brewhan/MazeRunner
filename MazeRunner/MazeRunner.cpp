@@ -260,8 +260,8 @@ unsigned int MazeRunner::straightUntilIntersection() {
   }
 }
 
-void MazeRunner::turn(char dir) {
-  switch(dir) {
+void MazeRunner::turn(char direction) {
+  switch(direction) {
     case 'L':
     case 'l':
       setSpeedsFor(-turning_max_speed, turning_max_speed, delay_ms);
