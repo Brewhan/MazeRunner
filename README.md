@@ -11,7 +11,7 @@ Unfortunately, our last robotics engineer has 'left the firm' and has left the c
 
 It is up to you; human, (hopefully!) to use that biological thinking cap and return this code to full working order - and then some!
 
-Please take some time to get familiar with the code itself, located  `MazeRunnerBroken.ino`. Should you need to view the source code of the helper functions, i would advise you to look at the file `MazeRunner.cpp` which is located in `Documents\Arduino\hardware\libpololu-arduino\avr\libraries`. *It is reccomended you do not change `MazeRunner/MazeRunner.cpp` unless you know what a header file is.*
+Please take some time to get familiar with the code itself, located  `MazeRunnerBroken.ino`. Should you need to view the source code of the helper functions, i would advise you to look at the file `MazeRunner\MazeRunner.cpp` which is located in `Documents\Arduino\hardware\libpololu-arduino\avr\libraries`. *It is reccomended you do not change `MazeRunner\MazeRunner.cpp` unless you know what a header file is.*
 
 I have included a file `RUN_GUIDE.md` which ontains instructions on how to run your code on the Robot. If you need any help with terminologies, logic, or are simply stuck, feel free to ask myself, or another biological life form for assistance. Please refrain from feeding any information to an AI, they will only confuse the situation further!
 
@@ -33,7 +33,7 @@ I have compiled what we believe has gone wrong with the `MazeRunnerBroken.ino` f
 
 #
 ## Additional tasks for extra credit
-*You may need to check the `MazeRunner/MazeRunner.cpp` file for guidance here*
+*You may need to check the `MazeRunner\MazeRunner.cpp` file for guidance here*
 
 
 1) The robot is equipped with a sound module. Create a custom tune to play during the celebration routine.
