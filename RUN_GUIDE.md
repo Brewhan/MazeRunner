@@ -3,33 +3,33 @@
 ## This guide will assist with running the code on the device and  common issues encountered when trying to run your code on the device. Please feel free to add your own thoughts here.
 #
 ## Verify
-### Verifying your code will ensure that the code is will 'run' when placed on the device. This does not mean that the code is 'good', just that there arent any hard errors.
-### To verify your code, you can click the `tick` button at the top left of the Arduino IDE. Any errors will appear at the bottom of the ide in the `output`.
+Verifying your code will ensure that the code is will 'run' when placed on the device. This does not mean that the code is 'good', just that there arent any hard errors.
+To verify your code, you can click the `tick` button at the top left of the Arduino IDE. Any errors will appear at the bottom of the ide in the `output`.
 
 ![verify](./Resources/verify.PNG "verify")
 ![output](./Resources/output.PNG "output") 
 #
 ## Upload
-### To upload code, make sure your robot is `ON` by pressing the power button and plug your programmer into your 3pi Robot, using the 6pin adaptor provided. Next, Within Arduino IDE do `Sketch > Upload Using Programmer`. IMPORTANT!! do NOT unplug the device until you hear a beep from the programmer chip, otherwise you can damage the device. (Trust me here!)
+To upload code, make sure your robot is `ON` by pressing the power button and plug your programmer into your 3pi Robot, using the 6pin adaptor provided. Next, Within Arduino IDE do `Sketch > Upload Using Programmer`. IMPORTANT!! do NOT unplug the device until you hear a beep from the programmer chip, otherwise you can damage the device. (Trust me here!)
 
 ![upload_using_programmer](/Resources/upload.PNG "upload_using_programmer")
 #
 ## Getting Started with the Maze
-### When you are ready to start testing your code, you can place the robot at the start of the maze, and press the `B BUTTON` (middle button) at the back of the robot to initiate calibration. Once it has calibrated by turning left and right, press the same button again to start startup procedures, and again to start the motors.
+When you are ready to start testing your code, you can place the robot at the start of the maze, and press the `B BUTTON` (middle button) at the back of the robot to initiate calibration. Once it has calibrated by turning left and right, press the same button again to start startup procedures, and again to start the motors.
 &nbsp;
 ### IMPORTANT!!! Please do not block the motors when the robot is running. if you need to stop the device, carefully pick it up and press the power off button
 &nbsp;
 
 #
 ## Rerunning 
-### Once the robot has gotten to the end and stopped, first off congrats! - secondly - you may see some text along the lines of 'press c to runReduce'. This is the replay function. From here, place the robot at the start of the maze, and press the  `C BUTTON`. The C button is located to the right of the `B BUTTON` and at the back of the device.
+Once the robot has gotten to the end and stopped, first off congrats! - secondly - you may see some text along the lines of 'press c to runReduce'. This is the replay function. From here, place the robot at the start of the maze, and press the  `C BUTTON`. The C button is located to the right of the `B BUTTON` and at the back of the device.
 #
 
 ## Help!
 &nbsp;
 
 ## I'm missing libraries!
-### If missing, make sure you download the libraries in the Arduino IDE by searching for 3pi in the libraries manager.
+If missing, make sure you download the libraries in the Arduino IDE by searching for 3pi in the libraries manager.
 ![missing_libraries](/Resources/library.PNG "missing_libraries")
 &nbsp;
 
