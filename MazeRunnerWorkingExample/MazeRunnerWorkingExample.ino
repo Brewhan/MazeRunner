@@ -18,6 +18,7 @@
  |_|  |_|\__,_/___\___| |_| \_\\__,_|_| |_|_| |_|\___|_|   
 
  Event created by Aisha Animashaun, Andrew Gillard, Georgia Isaac, Jamie Tizzard and Manav Gupta
+ Adapted for challenge event by Andrew Ramsier
 
 */
 /*
