@@ -34,7 +34,7 @@ If missing, make sure you download the libraries in the Arduino IDE by searching
 &nbsp;
 
 ## What Board am I Using?
-### Selecting the board, the port, and programmer is necessary to get code running on the device. This may already be set up for you, but in case you lose this info, here's the rundown, you are using a Pololu 3pi robot w/ATmega328p, now in case this does not mean anything to you, I have diagrams to help:
+Selecting the board, the port, and programmer is necessary to get code running on the device. This may already be set up for you, but in case you lose this info, here's the rundown, you are using a Pololu 3pi robot w/ATmega328p, now in case this does not mean anything to you, I have diagrams to help:
 ## Board:
 ![board](/Resources/board_info.PNG "board")
 &nbsp;
