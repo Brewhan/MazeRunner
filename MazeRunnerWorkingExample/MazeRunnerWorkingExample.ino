@@ -32,7 +32,7 @@ Sensor vals:
   black threshold
 */
 
-MazeRunner bot(FORWARD_FAST, TURN_MEDIUM);
+MazeRunner bot(FORWARD_MEDIUM, TURN_MEDIUM);
 
 unsigned int directions[3];
 char path[100] = "";
@@ -141,7 +141,7 @@ void loop() {
 
             if(!bot.isEndOfMaze()){
                 bot.turn(dir);
-                delay(1000);
+                delay(100);
             }
             else{
               //we want to break out of the loop if we are at the end of the maze! but something's missing....
