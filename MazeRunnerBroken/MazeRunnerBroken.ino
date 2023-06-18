@@ -18,14 +18,8 @@
  |_|  |_|\__,_/___\___| |_| \_\\__,_|_| |_|_| |_|\___|_|   
 
  Original Event created by Aisha Animashaun, Andrew Gillard, Georgia Isaac, Jamie Tizzard and Manav Gupta
- Modified for challenge format by Andrew Ramsier
+ Adapted for challenge event by Andrew Ramsier
 */
-const int GO_SLOW = 45;
-const int GO_MEDIUM = 70;
-const int GO_FAST = 180;
-const int TURN_SLOW = 50;
-const int TURN_MEDIUM = 80;
-const int TURN_FAST = 110;
 /*
 MazeRunner bot parameters:
   straight line speed,
@@ -37,7 +31,7 @@ Sensor vals:
   black threshold
 */
 
-MazeRunner bot(GO_SLOW, TURN_FAST, 175, 260.0, 150, 300, 600);
+MazeRunner bot(FORWARD_SLOW, TURN_FAST);
 
 unsigned int directions[3];
 char path[100] = "";
@@ -138,7 +132,6 @@ void loop() {
       delay("1000");
       
         while(1){
-            //custom motor speeds for left and right motors
             bot.straightUntilIntersection();
             bot.directionsAvailable(directions);
         
@@ -155,9 +148,9 @@ void loop() {
               }
             }
             else{
-              //we want to get out of the loop if we are at the end of the maze! but something's missing...
+              //TODO: Don't forget to add "break;" after the delay
               bot.stop();
-              OrangutanLCD::clear();
+              OrangutanLCD::clear;
               OrangutanLCD::printFromProgramSpace(complete_line1);
               OrangutanLCD::gotoXY(0,1);
               OrangutanLCD::printFromProgramSpace(complete_line2);
