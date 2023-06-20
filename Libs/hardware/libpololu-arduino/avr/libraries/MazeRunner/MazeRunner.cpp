@@ -58,12 +58,12 @@ const char levels[] PROGMEM = {
  char* bot_path;
  unsigned int bot_path_length = 0;
 
-static const int FORWARD_SLOW = 45;
-static const int FORWARD_MEDIUM = 70;
-static const int FORWARD_FAST = 180;
-static const int TURN_SLOW = 50;
-static const int TURN_MEDIUM = 80;
-static const int TURN_FAST = 110;
+// static const int FORWARD_SLOW = 45;
+// static const int FORWARD_MEDIUM = 70;
+// static const int FORWARD_FAST = 180;
+// static const int TURN_SLOW = 50;
+// static const int TURN_MEDIUM = 80;
+// static const int TURN_FAST = 110;
 
 MazeRunner::MazeRunner() {}
 
