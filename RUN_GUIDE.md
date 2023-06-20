@@ -1,3 +1,10 @@
+# https://github.com/Brewhan/MazeRunner/
+- Arduino IDE
+    - Library Manager -> Pololu3piPlus32U4
+-Clone the Repo
+   - Copy the `/MazeRunnerBroken` folder into `/Documents/Arduino`
+- From `/Documents/Arduino/MazeRunnerBroken/` open `MazeRunnerBroken.ino`
+
 # Run Guide
 
 ## This guide will assist with running the code on the device and  common issues encountered when trying to run your code on the device. Please feel free to add your own thoughts here.
