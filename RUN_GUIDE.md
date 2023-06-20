@@ -4,6 +4,7 @@
 -Clone the Repo
    - Copy all the folders within `/libs` into `/Documents/Arduino`
    - Copy the `/MazeRunnerBroken` folder into `/Documents/Arduino`
+   - Copy the `/MazeRunner` folder into `Documents/Arduino/libraries`
 - From `/Documents/Arduino/MazeRunnerBroken/` open `MazeRunnerBroken.ino`
 
 # Run Guide
