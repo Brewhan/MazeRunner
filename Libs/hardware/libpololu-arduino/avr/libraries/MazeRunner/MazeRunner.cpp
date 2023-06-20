@@ -7,6 +7,7 @@
 #include "../OrangutanLCD/OrangutanLCD.h"
 #include "../OrangutanPushbuttons/OrangutanPushbuttons.h"
 #include "../OrangutanBuzzer/OrangutanBuzzer.h"
+#include <EEPROM.h>
 
 #include <avr/pgmspace.h>
 
@@ -17,6 +18,12 @@ const char welcome_line1[] PROGMEM = "MazeRunner";
 const char welcome_line2[] PROGMEM = "3\xf7 Robot";
 const char welcome_line3[] PROGMEM = "Maze";
 const char welcome_line4[] PROGMEM = "solver";
+const char go_line1[] PROGMEM = "Press B";
+const char go_line2[] PROGMEM = "to go";
+const char complete_line1[] PROGMEM = "Maze";
+const char complete_line2[] PROGMEM = "Complete";
+const char runreduced_line1[] PROGMEM = "Press C";
+const char runreduced_line2[] PROGMEM = "toReduce";
 
 const char welcome[] PROGMEM = ">g32>>c32";
 const char go[] PROGMEM = "L16 cdegreg4";
@@ -48,26 +55,24 @@ const char levels[] PROGMEM = {
  int grey_threshold = 200;
  int black_threshold = 600;
 
-int GO_SLOW = 45;
-int GO_MEDIUM = 70;
-int GO_FAST = 180;
-int TURN_SLOW = 50;
-int TURN_MEDIUM = 80;
-int TURN_FAST = 110;
+ char* bot_path;
+ unsigned int bot_path_length = 0;
+
+// static const int FORWARD_SLOW = 45;
+// static const int FORWARD_MEDIUM = 70;
+// static const int FORWARD_FAST = 180;
+// static const int TURN_SLOW = 50;
+// static const int TURN_MEDIUM = 80;
+// static const int TURN_FAST = 110;
 
 MazeRunner::MazeRunner() {}
 
 
 
-MazeRunner::MazeRunner(int straight, int turning, int delay, double unit, int white, int grey, int black) {
+MazeRunner::MazeRunner(int straight, int turning) {
   straight_max_speed = straight;
   turning_max_speed = turning;
-  delay_ms = delay;
-  unit_time = unit;
 
-  white_threshold = white;
-  grey_threshold = grey;
-  black_threshold = black;
 }
 
 void MazeRunner::setupRobot() {
@@ -158,6 +163,9 @@ void MazeRunner::setupRobot() {
   OrangutanBuzzer::playFromProgramSpace(go);
   delay(1000);
   OrangutanLCD::clear();
+  OrangutanLCD::printFromProgramSpace(go_line1);
+  OrangutanLCD::gotoXY(0,1);
+  OrangutanLCD::printFromProgramSpace(go_line2);
   
   while(OrangutanBuzzer::isPlaying());
 }
@@ -252,8 +260,8 @@ unsigned int MazeRunner::straightUntilIntersection() {
   }
 }
 
-void MazeRunner::turn(char dir) {
-  switch(dir) {
+void MazeRunner::turn(char direction) {
+  switch(direction) {
     case 'L':
     case 'l':
       setSpeedsFor(-turning_max_speed, turning_max_speed, delay_ms);
@@ -281,7 +289,14 @@ void MazeRunner::setSpeedsFor(int leftMotor, int rightMotor, int delay_ms) {
   delay(delay_ms);
 }
 
-void MazeRunner::directionsAvailable(unsigned int *direction_array) {
+
+/* take a look around and see what directions are available to us
+  this will be returned a boolean within the directions list.. so
+  if directions[0] is true, then we have a left exit
+  if directions[1] is true, then we have straight(forward) exit
+  if directions[2] is true, then we have a right exit
+*/
+void MazeRunner::getDirectionsAvailable(unsigned int *direction_array) {
   read_line(sensors,IR_EMITTERS_ON);
 
   // Check for left and right exits.
@@ -308,4 +323,83 @@ unsigned int MazeRunner::isEndOfMaze() {
 
 void MazeRunner::stop() {
   setSpeedsFor(0, 0, 0);
+}
+
+void MazeRunner::complete() {
+  setSpeedsFor(0, 0, 0);
+  OrangutanLCD::clear();
+  OrangutanLCD::printFromProgramSpace(complete_line1);
+  OrangutanLCD::gotoXY(0,1);
+  OrangutanLCD::printFromProgramSpace(complete_line2);
+}
+
+// Path simplification.  The strategy is that whenever we encounter a
+// sequence xBx, we can simplify it by cutting out the dead end.  For
+// example, LBL -> S, because a single S bypasses the dead end
+// represented by LBL.
+void MazeRunner::simplify_path(char *path, int path_length) {
+  // only simplify the path if the second-to-last turn was a 'B'
+  if(path_length < 3 || path[path_length-2] != 'B')
+  return;
+
+  int total_angle = 0;
+  int i;
+  for(i=1;i<=3;i++)
+  {
+    switch(path[path_length-i])
+    {
+      case 'R':
+      total_angle += 90;
+      break;
+      case 'L':
+      total_angle += 270;
+      break;
+      case 'B':
+      total_angle += 180;
+      break;
+    }
+  }
+
+  // Get the angle as a number between 0 and 360 degrees.
+  total_angle = total_angle % 360;
+
+  // Replace all of those turns with a single one.
+  switch(total_angle)
+  {
+    case 0:
+    path[path_length - 3] = 'S';
+    break;
+    case 90:
+    path[path_length - 3] = 'R';
+    break;
+    case 180:
+    path[path_length - 3] = 'B';
+    break;
+    case 270:
+    path[path_length - 3] = 'L';
+    break;
+  }
+
+  // The path is now two steps shorter.
+  path_length -= 2;
+
+  // Set the global variables to be used later on.
+  bot_path = path;
+  bot_path_length = path_length;
+}
+
+// This will write the given path to the device.
+// In the interest of slim code we will also display the  "press c to run reduce here also."
+void MazeRunner::write_simple_path_to_device() {
+          int address = 0;
+        
+          for (int i=0; i < bot_path_length; i++){
+            EEPROM.write(address, bot_path[i]);
+            address++;
+          }
+          
+          OrangutanLCD::clear();
+          OrangutanLCD::printFromProgramSpace(runreduced_line1);
+          OrangutanLCD::gotoXY(0,1);
+          OrangutanLCD::printFromProgramSpace(runreduced_line2);
 }

@@ -1,10 +1,18 @@
 /*
   MazeRunner.h - Library for the Maze Runner Competition.
   Created by Manav Gupta, Jun 3, 2019.
+  Updated by Andrew Ramsier, June 4 2023.
   Released into the public domain.
 */
 #ifndef MazeRunner_h
 #define MazeRunner_h
+
+#define FORWARD_MEDIUM  70
+#define FORWARD_SLOW  45
+#define FORWARD_FAST  180
+#define TURN_SLOW 50
+#define TURN_MEDIUM 80
+#define TURN_FAST 110
 
 
 #include "../Pololu3pi/Pololu3pi.h"
@@ -19,13 +27,16 @@ class MazeRunner
 {
   public:
     MazeRunner();
-    MazeRunner(int straight, int turning, int delay, double unit, int white, int grey, int black);
+    MazeRunner(int straight, int turning);
     void setupRobot();
     void turn(char dir);
     unsigned int straightUntilIntersection();
-   	void directionsAvailable(unsigned int *direction_array);
+   	void getDirectionsAvailable(unsigned int *direction_array);
     unsigned int isEndOfMaze();
     void stop();
+    void complete();
+    void simplify_path(char *path, int path_length);
+    void write_simple_path_to_device();
   private:
   	void load_custom_characters();
   	void display_readings(const unsigned int *calibrated_values);
