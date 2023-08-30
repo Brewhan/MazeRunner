@@ -19,9 +19,15 @@
 - Arduino IDE
     - Library Manager -> Pololu3piPlus32U4
 -Clone the Repo
+   - Run `install.bat`
+ 
+  OR
+  
    - Copy all the folders within `/libs` into `/Documents/Arduino`
    - Copy the `/MazeRunnerBroken` folder into `/Documents/Arduino`
-- From `/Documents/Arduino/MazeRunnerBroken/` open `MazeRunnerBroken.ino`
+ 
+  THEN
+    - From `/Documents/Arduino/MazeRunnerBroken/` open `MazeRunnerBroken.ino`
 ## Verify
 Verifying your code will ensure that the code is will 'run' when placed on the device. This does not mean that the code is 'good', just that there arent any hard errors.
 To verify your code, you can click the `tick` button at the top left of the Arduino IDE. Any errors will appear at the bottom of the ide in the `output`.
