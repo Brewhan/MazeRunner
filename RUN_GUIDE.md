@@ -2,6 +2,9 @@
 - Arduino IDE
     - Library Manager -> Pololu3piPlus32U4
 -Clone the Repo
+-Easy Installation:
+    - run `install.bat`
+-Manual Installation:
    - Copy all the folders within `/libs` into `/Documents/Arduino`
    - Copy the `/MazeRunnerBroken` folder into `/Documents/Arduino`
 - From `/Documents/Arduino/MazeRunnerBroken/` open `MazeRunnerBroken.ino`
