@@ -11,6 +11,8 @@
    - Copy all the folders within `/libs` into `/Documents/Arduino`
    - Copy the `/MazeRunnerBroken` folder into `/Documents/Arduino`
 - From `/Documents/Arduino/MazeRunnerBroken/` open `MazeRunnerBroken.ino`
+  
+- Make sure MazeRunnerWorkingExample and MazeRunnerSimplified are not visible to participants
 
 # Run Guide
 
