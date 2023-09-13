@@ -1,7 +1,8 @@
 # https://github.com/Brewhan/MazeRunner/
-- Arduino IDE
-    - Library Manager -> Pololu3piPlus32U4
--Clone the Repo
+- Download the latest Arduino IDE
+    - Library Manager -> Pololu3piPlus32U4  
+
+- Clone this Github repository  
 
 - Easy Installation:
     - run `install.bat`
@@ -16,9 +17,9 @@
 ## This guide will assist with running the code on the device and  common issues encountered when trying to run your code on the device. Please feel free to add your own thoughts here.
 #
 ## Sample Pre-requisites
-- Arduino IDE
-    - Library Manager -> Pololu3piPlus32U4
--Clone the Repo
+- Download Latest Arduino IDE
+    - In the Library Manager, get the Pololu3piPlus32U4 library
+- Clone this Github repository
    - Run `install.bat`
  
   OR
