@@ -1,17 +1,17 @@
 # https://github.com/Brewhan/MazeRunner/
 - Download the latest Arduino IDE
-    - Library Manager -> Pololu3piPlus32U4  
+    - Library Manager -> Pololu3piPlus32U4
 
-- Clone this Github repository  
+- Clone this Github repository
 
 - Easy Installation:
     - run `install.bat`
-    
+
 - Manual Installation:
-   - Copy all the folders within `/libs` into `/Documents/Arduino`
-   - Copy the `/MazeRunnerBroken` folder into `/Documents/Arduino`
+    - Copy all the folders within `/libs` into `/Documents/Arduino`
+    - Copy the `/MazeRunnerBroken` folder into `/Documents/Arduino`
 - From `/Documents/Arduino/MazeRunnerBroken/` open `MazeRunnerBroken.ino`
-  
+
 - Make sure MazeRunnerWorkingExample and MazeRunnerSimplified are not visible to participants
 
 # Run Guide
@@ -22,13 +22,13 @@
 - Download Latest Arduino IDE
     - In the Library Manager, get the Pololu3piPlus32U4 library
 - Clone this Github repository
-   - Run `install.bat`
- 
+    - Run `install.bat`
+
   OR
-  
-   - Copy all the folders within `/libs` into `/Documents/Arduino`
-   - Copy the `/MazeRunnerBroken` folder into `/Documents/Arduino`
- 
+
+    - Copy all the folders within `/libs` into `/Documents/Arduino`
+    - Copy the `/MazeRunnerBroken` folder into `/Documents/Arduino`
+
   THEN
     - From `/Documents/Arduino/MazeRunnerBroken/` open `MazeRunnerBroken.ino`
 ## Verify
@@ -36,7 +36,7 @@ Verifying your code will ensure that the code is will 'run' when placed on the d
 To verify your code, you can click the `tick` button at the top left of the Arduino IDE. Any errors will appear at the bottom of the ide in the `output`.
 
 ![verify](./Resources/verify.PNG "verify")
-![output](./Resources/output.PNG "output") 
+![output](./Resources/output.PNG "output")
 #
 ## Upload
 To upload code, make sure your robot is `ON` by pressing the power button and plug your programmer into your 3pi Robot, using the 6pin adaptor provided. Next, Within Arduino IDE do `Sketch > Upload Using Programmer`. IMPORTANT!! do NOT unplug the device until you hear a beep from the programmer chip, otherwise you can damage the device. (Trust me here!)
@@ -50,7 +50,7 @@ When you are ready to start testing your code, you can place the robot at the st
 &nbsp;
 
 #
-## Rerunning 
+## Rerunning
 Once the robot has gotten to the end and stopped, first off congrats! - secondly - you may see some text along the lines of 'press c to runReduce'. This is the replay function. From here, place the robot at the start of the maze, and press the  `C BUTTON`. The C button is located to the right of the `B BUTTON` and at the back of the device.
 #
 
@@ -79,11 +79,11 @@ When you select the port, another dialogue box will appear and ask you to choose
 
 ## I can't upload code  /  What's a programmer?
 
-*So you have this little device that plugs into the robot - this is your programmer. It is your `interface` between the computer and the robot, and it knows how to speak it's language! Make sure when you are uploading code to the language, you use this clever interpreter. To do so, you can use `Sketch > Upload Using Programmer`.*
+*So you have this little device that plugs into the robot - this is your programmer. It is your `interface` between the computer and the robot, and it knows how to speak its language! Make sure when you are uploading code to the language, you use this clever interpreter. To do so, you can use `Sketch > Upload Using Programmer`.*
 
 ![upload_using_programmer](/Resources/upload.PNG "upload_using_programmer")
 
-In the odd case that your Arduino envrionment doesn't know what type of programmer you have, you can manually set it to `Atmel STK500 development board`. 
+In the odd case that your Arduino envrionment doesn't know what type of programmer you have, you can manually set it to `Atmel STK500 development board`.
 
 ![programmer](/Resources/programmer.PNG "programmer")
 
