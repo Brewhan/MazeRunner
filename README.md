@@ -13,7 +13,7 @@ It is up to you, human, (hopefully!) to use that biological thinking cap and ret
 
 Please take some time to get familiar with the code itself, located at `MazeRunnerBroken.ino`. Should you need to view the source code of the helper functions, i would advise you to look at the file `MazeRunner.cpp` which is located in `Documents\Arduino\hardware\libpololu-arduino\avr\libraries`. *It is recommended you do not change `MazeRunner\MazeRunner.cpp` unless you know what a header file is.*
 
-I have included a file `RUN_GUIDE.md` which contains instructions on how to run your code on the Robot. If you need any help with terminologies, logic, or are simply stuck, feel free to ask myself, or another biological life form for assistance. Please refrain from feeding any information to an AI, they will only confuse the situation further!
+I have included a file `RUN_GUIDE.md` which contains instructions on how to run your code on the Robot. If you need any help with terminologies, logic, or are simply stuck, feel free to ask myself (Andrew), or another biological life form (Team Mentor, SME, etc) for assistance. Please refrain from feeding any information to an AI, they will only confuse the situation further!
 
 I have compiled what we believe has gone wrong with the `MazeRunnerBroken.ino` file into a set of tasks. Please complete these tasks sequentially as to avoid getting lost.
 
