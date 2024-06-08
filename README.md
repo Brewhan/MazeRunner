@@ -33,7 +33,7 @@ I have compiled what we believe has gone wrong with the `MazeRunnerBroken.ino` f
 
 #
 ## Additional tasks for extra credit
-*You may need to check the `Arduino.cpp` file for guidance here*
+*You may need to check the `MazeRunner.cpp` file for guidance here*
 
 
 1) The robot is equipped with a sound module. Create a custom tune to play during the celebration routine.
