@@ -119,6 +119,7 @@ The code here is missing a `break;` after the `delay(1000);` this means that the
 ## Task 7: The replay method seems to be incomplete. The replay method can't navigate the previous path. Identify why this is, and correct the behavior.
 This task is tricky and may require and explanation on how indexes work. Try and visualise the issue...
 ```c++
+// HYPOTHETICAL CODE!
 while(1){
     Path[0];
     0 = 0 + 0;
@@ -127,6 +128,7 @@ while(1){
 This will ALWAYS get the first element of path...
 
 ```c++
+// HYPOTHETICAL CODE!
 index = 0;
 while(1){
    Path[index];
@@ -137,11 +139,11 @@ This will correctly increment the index each time as we are adding +1 each time 
 
 **Solution** 
 ```c++
-index_of_directions = index_of_directions + 0;
+line 200: index_of_directions = index_of_directions + 0;
 ```
 We are not incrementing the index, so when the path is recalled in a loop, the index will always be zero. To solve this challenge, we should set the code to increment by + 1. E.g.
 ```c++
-index_of_directions = index_of_directions + 1;
+line 200: index_of_directions = index_of_directions + 1;
 ```
 
 
