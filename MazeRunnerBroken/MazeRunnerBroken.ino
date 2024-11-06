@@ -37,9 +37,9 @@ unsigned int directions[3];
 char path[100] = "";
 unsigned char path_length = 0; // the length of the path
 
-const int go_line1[] PROGMEM = "Press B";
+const char go_line1[] PROGMEM = "Press B"; //TASK 2 HERE INT to CHAR
 const char go_line2[] PROGMEM = "to go";
-const char runreduced line1[] PROGMEM = "Press C";
+const char runreduced_line1[] PROGMEM = "Press C"; // MISSING SPACE BETWEEN RUNREDUCED_LINE1
 const char runreduced_line2[] PROGMEM = "toReduce";
 const char complete_line1[] PROGMEM = "Maze";
 const char complete_line2[] PROGMEM = "Complete";
@@ -47,7 +47,7 @@ const char complete_line2[] PROGMEM = "Complete";
 // Initializes the 3pi, displays a welcome message, calibrates, and
 // plays the initial music.
 void setup() {
- bot.setupRobot()
+ bot.setupRobot(); //TASK 2 HERE: SEMICOLON
  OrangutanLCD::printFromProgramSpace(go_line1);
  OrangutanLCD::gotoXY(0,1);
  OrangutanLCD::printFromProgramSpace(go_line2);
@@ -57,7 +57,7 @@ void setup() {
 // maze solving.  It uses the variables found_left, found_straight, and
 // found_right, which indicate whether there is an exit in each of the
 // three directions, applying the "left hand on the wall" strategy.
-char c2VsZWN0X3R1cm4(unsigned char found_left, unsigned char found_straight, unsigned char found_right)
+char select_turn(unsigned char found_left, unsigned char found_straight, unsigned char found_right)
 {
   // Make a decision about how to turn.  The following code
   // implements a right-hand-on-the-wall strategy, where we always
@@ -76,7 +76,7 @@ char c2VsZWN0X3R1cm4(unsigned char found_left, unsigned char found_straight, uns
 // sequence xBx, we can simplify it by cutting out the dead end.  For
 // example, LBL -> S, because a single S bypasses the dead end
 // represented by LBL.
-void c2ltcGxpZnk()
+void simplify_path()
 {
   // only simplify the path if the second-to-last turn was a 'B'
   if(path_length < 3 || path[path_length-2] != 'B')
@@ -133,7 +133,7 @@ void loop() {
       
         while(1){
             bot.straightUntilIntersection();
-            bot.directionsAvailable(directions);
+            bot.getDirectionsAvailable(directions); //TASK 2 HERE: Get directions available not directions available
         
             unsigned char dir = select_turn(directions[0], directions[1], directions[2]);
             
@@ -185,12 +185,12 @@ void loop() {
           while(1){
                       
             bot.straightUntilIntersection();
-            bot.directionsAvailable(directions);
+            bot.getDirectionsAvailable(directions); // task 2 here : get directions available
              
             unsigned char dir = path[index_of_directions];
             
             if(!bot.isEndOfMaze()){
-                bot.turn(Dir);
+                bot.turn(dir); //TASK 2 HERE: Dir should be lowercase
               } else {
                 bot.stop();
               OrangutanLCD::clear();

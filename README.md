@@ -25,8 +25,8 @@ I have compiled what we believe has gone wrong with the `MazeRunnerBroken.ino` f
 3) The Robot only turns right. In order to solve the maze, we will need the left turning case.
 4) The Robot starts and stops with a frustrating delay, can you improve this?
 5) The Robot's speed is incorrect. Identify why this is, and correct it. *(Tip: Don't overdo it!)*
-6) The Robot does not stop when the maze is complete. Identify how to detect when the maze is over and stop the Robot from moving, before invoking the replay function.
-7) The replay method seems to be incomplete. The replay method can't navigate the previous path. Identify why this is, and correct the behavior.
+6) The Robot does not stop when the maze is complete. Identify how to detect when the maze is over and stop the Robot from moving.
+7) The robot cannot recal previous directions very well. It stores every direction in "Path" and tries to recall each decision when the "C" button is pressed. Identify why the robot is not recalling past directions, and correct the behavior.
 8) The Robot favours the right. Can you Identify a better way of doing this? Perhaps re-arrange the priority in the directional choice switch.
 9) When the robot completes the replay method, it simply stops moving. To improve the Robot's morale, we should have the robot perform a celebration. For example a 'spin' or a 'shuffle'.
 10) The robot should now be fully functional and ready for shipping - but - it's far from perfect. Do what you can to optimize the code to make the Robot solve the maze and subsequently re-run the solution faster!
