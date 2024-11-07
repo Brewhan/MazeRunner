@@ -35,8 +35,8 @@
 Verifying your code will ensure that the code is will 'run' when placed on the device. This does not mean that the code is 'good', just that there arent any hard errors.
 To verify your code, you can click the `tick` button at the top left of the Arduino IDE. Any errors will appear at the bottom of the ide in the `output`.
 
-![verify](./Resources/verify.PNG "verify")
-![output](./Resources/output.PNG "output")
+![verify](/Resources/verify.PNG "verify")
+![output](/Resources/output.PNG "output")
 #
 ## Upload
 To upload code, make sure your robot is `ON` by pressing the power button and plug your programmer into your 3pi Robot, using the 6pin adaptor provided. Next, Within Arduino IDE do `Sketch > Upload Using Programmer`. IMPORTANT!! do NOT unplug the device until you hear a beep from the programmer chip, otherwise you can damage the device. (Trust me here!)
