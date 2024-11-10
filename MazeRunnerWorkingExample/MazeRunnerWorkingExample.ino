@@ -26,11 +26,10 @@ MazeRunner bot parameters:
   straight line speed,
   turning speed,
   delay between actions
-Sensor vals:
-  white threshold
-  grey threshold
-  black threshold
 */
+
+OrangutanLCD display;
+OrangutanPushbuttons buttons;
 
 MazeRunner bot(FORWARD_MEDIUM, TURN_MEDIUM);
 
@@ -49,9 +48,9 @@ const char complete_line2[] PROGMEM = "Complete";
 // plays the initial music.
 void setup() {
  bot.setupRobot();
- OrangutanLCD::printFromProgramSpace(go_line1);
- OrangutanLCD::gotoXY(0,1);
- OrangutanLCD::printFromProgramSpace(go_line2);
+ display.printFromProgramSpace(go_line1);
+ display.gotoXY(0,1);
+ display.printFromProgramSpace(go_line2);
 }
 
 // This function decides which way to turn during the learning phase of
@@ -129,8 +128,8 @@ void simplify_path()
 // This function is called once.
 void loop() {
 
-    if(OrangutanPushbuttons::isPressed(BUTTON_B)){
-      OrangutanLCD::clear();
+    if(buttons.isPressed(BUTTON_B)){
+      display.clear();
       delay(1000);
       
         while(1){
@@ -146,10 +145,10 @@ void loop() {
             else{
               //we want to break out of the loop if we are at the end of the maze! but something's missing....
               bot.stop();  
-              OrangutanLCD::clear;
-              OrangutanLCD::printFromProgramSpace(complete_line1);
-              OrangutanLCD::gotoXY(0,1);
-              OrangutanLCD::printFromProgramSpace(complete_line2);
+              display.clear;
+              display.printFromProgramSpace(complete_line1);
+              display.gotoXY(0,1);
+              display.printFromProgramSpace(complete_line2);
               delay(5000);
               break;
             }
@@ -168,16 +167,16 @@ void loop() {
             address++;
           }
           
-          OrangutanLCD::clear();
-          OrangutanLCD::printFromProgramSpace(runreduced_line1);
-          OrangutanLCD::gotoXY(0,1);
-          OrangutanLCD::printFromProgramSpace(runreduced_line2);
+          display.clear();
+          display.printFromProgramSpace(runreduced_line1);
+          display.gotoXY(0,1);
+          display.printFromProgramSpace(runreduced_line2);
           
           while(!button_is_pressed(BUTTON_C)) {
           }
               
           delay(1000);
-          OrangutanLCD::clear();
+          display.clear();
             
           while(1){
                       
@@ -191,10 +190,10 @@ void loop() {
                 bot.turn(dir);
               } else {
                 bot.stop();
-                              OrangutanLCD::clear;
-              OrangutanLCD::printFromProgramSpace(complete_line1);
-              OrangutanLCD::gotoXY(0,1);
-              OrangutanLCD::printFromProgramSpace(complete_line2);
+                              display.clear;
+              display.printFromProgramSpace(complete_line1);
+              display.gotoXY(0,1);
+              display.printFromProgramSpace(complete_line2);
                 break;
             }
           index_of_directions = index_of_directions + 1;
