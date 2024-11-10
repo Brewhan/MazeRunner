@@ -14,7 +14,7 @@ line 60: char c2VsZWN0X3R1cm4(unsigned char found_left, unsigned char found_stra
 line 79: void c2ltcGxpZnk()
 ```
 
-**After**
+**Solution**
 ```c++
 line 61: char select_turn(unsigned char found_left, unsigned char found_straight, unsigned char found_right)
 ```
@@ -38,6 +38,11 @@ line 40: const int go_line1[] PROGMEM = "Press B";
 line 42:  const char runreduced line1[] PROGMEM = "Press C";
 ```
 `runreduced line1[]` is not a valid variable name as it contains a space. It can be changed to  `runreduced_line1[]`.
+#
+```c++
+line 45: const char complete_line2[] PROGMEM = "Complete"
+```
+This line is missing a semicolon `;` at the end.  
 #
 ```c++
 line 136: bot.directionsAvailable(directions);
