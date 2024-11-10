@@ -32,6 +32,7 @@ calibration_speed = 1000
 calibration_count = 100
 encoder_count_max = 195
 encorder_count_forward = 100
+sensor_threshold = 300
 
 display.fill(0)
 display.text("Line Follower", 0, 0)
@@ -42,6 +43,27 @@ display.show()
 
 while not button_a.check():
     pass
+
+def update_display():
+    display.fill(0)
+    display.text("Maze Solver", 0, 0)
+
+    ms = (t2 - t1)/1000
+    display.text(f"Main loop: {ms:.1f}ms", 0, 20)
+    display.text(f'p = {str(p)},  pd = {str(power_difference)}', 0, 30)
+    # display.text('pd = '+str(power_difference), 0, 40)
+
+    # 64-40 = 24
+    scale = 24/1000
+
+    display.fill_rect(36, 64-int(line[0]*scale), 8, int(line[0]*scale), 1)
+    display.fill_rect(48, 64-int(line[1]*scale), 8, int(line[1]*scale), 1)
+    display.fill_rect(60, 64-int(line[2]*scale), 8, int(line[2]*scale), 1)
+    display.fill_rect(72, 64-int(line[3]*scale), 8, int(line[3]*scale), 1)
+    display.fill_rect(84, 64-int(line[4]*scale), 8, int(line[4]*scale), 1)
+
+    display.show()
+
 
 display.fill(0)
 display.show()
@@ -74,6 +96,7 @@ line = []
 starting = False
 run_motors = False
 last_update_ms = 0
+power_difference = 0 
 
 def straight_until_intersection() -> bool:
     display.fill(0)
@@ -86,6 +109,8 @@ def straight_until_intersection() -> bool:
         # save a COPY of the line sensor data in a global variable
         # to allow the other thread to read it safely.
         line = line_sensors.read_calibrated()[:]
+
+        update_display()
         line_sensors.start_read()
         t1 = t2
         t2 = time.ticks_us()
@@ -106,7 +131,6 @@ def straight_until_intersection() -> bool:
         d = p - last_p
         integral += p
         last_p = p
-        
         power_difference = p / 20 + integral / 10000 + d * 3 / 2
 
         if(power_difference > max_speed):
@@ -123,7 +147,7 @@ def straight_until_intersection() -> bool:
         
 
         if is_maze_end(): end()
-        elif int(line[0]) < 100 & int(line[1]) < 100 & int(line[2]) < 100 & int(line[3]) < 100 & int(line[4]) < 100:
+        elif int(line[0]) < 200 & int(line[1]) < 200 & int(line[2]) < 200 & int(line[3]) < 200 & int(line[4]) < 200:
             #dead end
             motors.set_speeds(0,0)
             time.sleep_ms(1000)
@@ -222,7 +246,7 @@ def get_available_directions():
 
     line = line_sensors.read_calibrated()[:]
 
-    if int(line[1]) + int(line[2]) + int(line[3]) > threshold:
+    if int(line[1]) + int(line[2]) + int(line[3]) > threshold+100:
         straight_dir = True
 
     directions = [left_dir, right_dir, straight_dir]
