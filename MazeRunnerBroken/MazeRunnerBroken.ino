@@ -20,16 +20,16 @@
  Original Event created by Aisha Animashaun, Andrew Gillard, Georgia Isaac, Jamie Tizzard and Manav Gupta
  Adapted for challenge event by Andrew Ramsier
 */
+
 /*
 MazeRunner bot parameters:
   straight line speed,
   turning speed,
   delay between actions
-Sensor vals:
-  white threshold
-  grey threshold
-  black threshold
 */
+
+OrangutanLCD display;
+OrangutanPushbuttons buttons;
 
 MazeRunner bot(FORWARD_SLOW, TURN_FAST);
 
@@ -37,20 +37,22 @@ unsigned int directions[3];
 char path[100] = "";
 unsigned char path_length = 0; // the length of the path
 
-const char go_line1[] PROGMEM = "Press B"; //TASK 2 HERE INT to CHAR
+const int go_line1[] PROGMEM = "Press B";
 const char go_line2[] PROGMEM = "to go";
-const char runreduced_line1[] PROGMEM = "Press C"; // MISSING SPACE BETWEEN RUNREDUCED_LINE1
+const char runreduced line1[] PROGMEM = "Press C";
 const char runreduced_line2[] PROGMEM = "toReduce";
 const char complete_line1[] PROGMEM = "Maze";
-const char complete_line2[] PROGMEM = "Complete";
+const char complete_line2[] PROGMEM = "Complete"
+
+
 
 // Initializes the 3pi, displays a welcome message, calibrates, and
 // plays the initial music.
 void setup() {
- bot.setupRobot(); //TASK 2 HERE: SEMICOLON
- OrangutanLCD::printFromProgramSpace(go_line1);
- OrangutanLCD::gotoXY(0,1);
- OrangutanLCD::printFromProgramSpace(go_line2);
+ bot.setupRobot();
+ display.printFromProgramSpace(go_line1);
+ display.gotoXY(0,1);
+ display.printFromProgramSpace(go_line2);
 }
 
 // This function decides which way to turn during the learning phase of
@@ -127,13 +129,13 @@ void simplify_path()
 // This function is called once.
 void loop() {
 
-    if(OrangutanPushbuttons::isPressed(BUTTON_B)){
-      OrangutanLCD::clear();
+    if(buttons.isPressed(BUTTON_B)){
+      display.clear();
       delay("1000");
       
         while(1){
             bot.straightUntilIntersection();
-            bot.getDirectionsAvailable(directions); //TASK 2 HERE: Get directions available not directions available
+            bot.directionsAvailable(directions);
         
             unsigned char dir = select_turn(directions[0], directions[1], directions[2]);
             
@@ -150,10 +152,10 @@ void loop() {
             else{
               //TODO: Don't forget to add "break;" after the delay
               bot.stop();
-              OrangutanLCD::clear;
-              OrangutanLCD::printFromProgramSpace(complete_line1);
-              OrangutanLCD::gotoXY(0,1);
-              OrangutanLCD::printFromProgramSpace(complete_line2);
+              display.clear;
+              display.printFromProgramSpace(complete_line1);
+              display.gotoXY(0,1);
+              display.printFromProgramSpace(complete_line2);
               delay(1000);
             }
         
@@ -171,35 +173,36 @@ void loop() {
             address++;
           }
           
-          OrangutanLCD::clear();
-          OrangutanLCD::printFromProgramSpace(runreduced_line1);
-          OrangutanLCD::gotoXY(0,1);
-          OrangutanLCD::printFromProgramSpace(runreduced_line2);
+          display.clear();
+          display.printFromProgramSpace(runreduced_line1);
+          display.gotoXY(0,1);
+          display.printFromProgramSpace(runreduced_line2);
           
+          //This waits for the button c to be pressed!
           while(!button_is_pressed(BUTTON_C)) {
           }
               
           delay(1000);
-          OrangutanLCD::clear();
+          display.clear();
             
           while(1){
                       
             bot.straightUntilIntersection();
-            bot.getDirectionsAvailable(directions); // task 2 here : get directions available
-             
+            bot.directionsAvailable(directions);
+            
             unsigned char dir = path[index_of_directions];
             
             if(!bot.isEndOfMaze()){
-                bot.turn(dir); //TASK 2 HERE: Dir should be lowercase
+                bot.turn(Dir); 
               } else {
                 bot.stop();
-              OrangutanLCD::clear();
-              OrangutanLCD::printFromProgramSpace(complete_line1);
-              OrangutanLCD::gotoXY(0,1);
-              OrangutanLCD::printFromProgramSpace(complete_line2);
+                display.clear();
+                display.printFromProgramSpace(complete_line1);
+                display.gotoXY(0,1);
+                display.printFromProgramSpace(complete_line2);
                 break;
             }
-          
+            //FIXME: Something here isn't working properly? 
             index_of_directions = index_of_directions + 0;
           }
     }
