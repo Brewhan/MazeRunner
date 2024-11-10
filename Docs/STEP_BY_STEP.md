@@ -220,21 +220,21 @@ line 208: }
 ## Task 10: The robot should now be fully functional and ready for shipping - but - it's far from perfect. Do what you can to optimize the code to make the Robot solve the maze and subsequently re-run the solution faster!
 This task is open ended and down to the team to decide what they think makes the bot better. Some ideas to consider is to check for redundant code, e.g.
 ```c++
-line: 143   if(dir == 'L'){
-line: 144     bot.turn(dir);
-line: 145     delay(3000);
-line: 146   }
-line: 147   else{
-line: 148     bot.turn(dir);
-line: 149     delay(1000);
-line: 150   }
+line 143:   if(dir == 'L'){
+line 144:     bot.turn(dir);
+line 145:     delay(3000);
+line 146:   }
+line 147:   else{
+line 148:     bot.turn(dir);
+line 149:     delay(1000);
+line 150:   }
 ```
 before in task 4, we changed this delay as it was causing a slowdown, but actually, the entire if block is unnecessary.
 The corrected code can be:
 
 ```c++
-line: 143     bot.turn(dir);
-line: 144     delay(1000);
+line 143:     bot.turn(dir);
+line 144:     delay(1000);
 ```
 Furthermore, you may decide `delay(1000);` is waiting for far too long, you can experiment with removing or reducing the delays and seeing what happens.
 &nbsp;
