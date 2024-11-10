@@ -196,10 +196,10 @@ void loop() {
                 bot.turn(Dir); 
               } else {
                 bot.stop();
-              display.clear();
-              display.printFromProgramSpace(complete_line1);
-              display.gotoXY(0,1);
-              display.printFromProgramSpace(complete_line2);
+                display.clear();
+                display.printFromProgramSpace(complete_line1);
+                display.gotoXY(0,1);
+                display.printFromProgramSpace(complete_line2);
                 break;
             }
             //FIXME: Something here isn't working properly? 

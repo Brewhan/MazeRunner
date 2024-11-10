@@ -2,6 +2,8 @@
 ## Not for use by participants
 The purpose of this guide is to give an overview of how these challenges can be solved. Whilst challenges may not be prescriptive, this guide should give you a working bot that can complete a maze.
 
+***Please not the line numbers might change, and so should be used as a guideline***
+
 ## Task 1: The Robot's function names are corrupted, please correct them to something human-readable.
 
 This task is designed to cause compiler errors and provide a very obvious error. It also introduces students to being clear with naming functions by understanding what the code is trying to do. 
@@ -82,7 +84,7 @@ This task asks us to read the code, understand the logical process, and independ
 
 **Solution**
 ```c++
-line 143:    delay(3000);
+line 145:    delay(3000);
 ```
 The delay is 3 seconds (3000ms), which is far too long. Instead, we can do `delay(1000)` which is 1 second (1000ms).
 
@@ -142,14 +144,111 @@ while(1){
 ```
 This will correctly increment the index each time as we are adding +1 each time we loop around.
 
-**Solution** 
+Looking back at the code we have, we notice that it is not incrementing:
 ```c++
 line 200: index_of_directions = index_of_directions + 0;
 ```
+
+**Solution** 
 We are not incrementing the index, so when the path is recalled in a loop, the index will always be zero. To solve this challenge, we should set the code to increment by + 1. E.g.
 ```c++
 line 200: index_of_directions = index_of_directions + 1;
 ```
 
+&nbsp;
+&nbsp;
+#
+## Task 8: The Robot favours the right. Can you Identify a better way of doing this? Perhaps re-arrange the priority in the directional choice switch.
+This task's solution is not the same as task 3. Instead, it is asking you to look at the logical order of this code. 
+If you look at the select turn function, you can see the order of the decision making. In order to solve some mazes, you would have to change the strategy to perhaps a left hand on the wall, which means changing the order of operations from ` R > S > L > B ` to ` L > S > R > B `.
+&nbsp;
+**Solution** 
+```c++ 
+  line 67:  if(found_left)
+  line 68:    return 'L';
+  line 69:  else if(found_straight)
+  line 70:    return 'S';
+  line 71:  else if(found_right)
+  line 72:    return 'R';
+  line 73:  else
+  line 74:    return 'B';
+```
+  *Tip: Later on, you might want to change the code choose a strategy based on which button is pressed.*
+&nbsp;
+&nbsp;
+#
+## Task 9: When the robot completes the replay method, it simply stops moving. To improve the Robot's morale, we should have the robot perform a celebration. For example a 'spin' or a 'shuffle'.
+This is a challenge that rather than fixing code, is asking the participant to start writing their own code.
+&nbsp;
+Let's start by looking at this code block:
+```c++
+line 195: if(!bot.isEndOfMaze()){
+line 196:   bot.turn(dir); 
+line 197: } else {
+line 198:   bot.stop();
+line 199:   display.clear();
+line 200:   display.printFromProgramSpace(complete_line1);
+line 201:   display.gotoXY(0,1);
+line 202:   display.printFromProgramSpace(complete_line2);
+line 203:   break;
+line 204: }
+```
+On line 195, we begin the `if` statement, this particular is defining what we do when the bot is *Not* at the end of the maze. What we are interested in is the `else` statement. From here we can tell the robot what to do when it reaches the end of the maze.
 
+The following code will tell the robot to turn left 4 times. Available directions for `bot.turn()` are `L`, `R`, and `B`.
 
+**Example Solution**
+```c++
+line 195: if(!bot.isEndOfMaze()){
+line 196:   bot.turn(dir); 
+line 197: } else {
+line 198:   bot.stop();
+line 199:   display.clear();
+line 200:   display.printFromProgramSpace(complete_line1);
+line 201:   display.gotoXY(0,1);
+line 202:   display.printFromProgramSpace(complete_line2);
+line 203:   bot.turn('L');
+line 204:   bot.turn('L');
+line 205:   bot.turn('L');
+line 206:   bot.turn('L');
+line 207:   break;
+line 208: }
+```
+&nbsp;
+&nbsp;
+#
+## Task 10: The robot should now be fully functional and ready for shipping - but - it's far from perfect. Do what you can to optimize the code to make the Robot solve the maze and subsequently re-run the solution faster!
+This task is open ended and down to the team to decide what they think makes the bot better. Some ideas to consider is to check for redundant code, e.g.
+```c++
+line: 143   if(dir == 'L'){
+line: 144     bot.turn(dir);
+line: 145     delay(3000);
+line: 146   }
+line: 147   else{
+line: 148     bot.turn(dir);
+line: 149     delay(1000);
+line: 150   }
+```
+before in task 4, we changed this delay as it was causing a slowdown, but actually, the entire if block is unnecessary.
+The corrected code can be:
+
+```c++
+line: 143     bot.turn(dir);
+line: 144     delay(1000);
+```
+Furthermore, you may decide `delay(1000);` is waiting for far too long, you can experiment with removing or reducing the delays and seeing what happens.
+&nbsp;
+Another thing to consider is tuning the speed of the bot as we did in task 5. When doing the replay method, perhaps you could try and make the robot much faster, since you already know the route it is going to take.
+&nbsp;
+Without saying too much to the participants, remember you can program the button presses with behavior. Take a look at the following
+```c++
+line 129: // This function is called once.
+line 130: void loop() {
+line 131:
+line 132:    if(buttons.isPressed(BUTTON_B)){
+```
+if you added an `else if(buttons.isPressed(BUTTON_C))` you could have some code that would only run if you pressed the `C` button at the start.
+&nbsp;
+&nbsp;
+#
+I Have not provided any step by step instructions for further tasks.
