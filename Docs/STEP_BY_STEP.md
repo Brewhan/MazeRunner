@@ -2,7 +2,7 @@
 ## Not for use by participants
 The purpose of this guide is to give an overview of how these challenges can be solved. Whilst challenges may not be prescriptive, this guide should give you a working bot that can complete a maze.
 
-***Please not the line numbers might change, and so should be used as a guideline***
+***Please note the line numbers might change, and so should be used as a guideline***
 
 ## Task 1: The Robot's function names are corrupted, please correct them to something human-readable.
 
