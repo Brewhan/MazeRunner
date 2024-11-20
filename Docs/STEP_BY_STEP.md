@@ -2,9 +2,10 @@
 ## Not for use by participants
 The purpose of this guide is to give an overview of how these challenges can be solved. Whilst challenges may not be prescriptive, this guide should give you a working bot that can complete a maze.
 
-***Please note the line numbers might change, and so should be used as a guideline***
+***Please note the line numbers might change, and so should only be used as a guideline***
 
 ## Task 1: The Robot's function names are corrupted, please correct them to something human-readable.
+In Short, the names of the functions are wrong. As a result, some calls are being made to functions that do not exist, e.g. select_turn().
 
 This task is designed to cause compiler errors and provide a very obvious error. It also introduces students to being clear with naming functions by understanding what the code is trying to do. 
 
