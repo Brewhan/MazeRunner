@@ -113,7 +113,7 @@ def straight_until_intersection() -> bool:
         # save a COPY of the line sensor data in a global variable
         # to allow the other thread to read it safely.
         line = line_sensors.read_calibrated()[:]
-        update_display(prev_message)
+        update_display("")
         line_sensors.start_read()
         t1 = t2
         t2 = time.ticks_us()
@@ -156,27 +156,27 @@ def straight_until_intersection() -> bool:
         elif (int(line[1]) < 200) and (int(line[2]) < 200) and (int(line[3]) < 200):
             #dead end
             motors.set_speeds(0,0)
-            t = "B"
-            turn(t)
-            update_display(t)
+
+            turn("B")
+            update_display("")
 
 
         elif (int(line[0]) > 200) or (int(line[4]) > 200):
             motors.set_speeds(0,0)
-            t = what_turn()
-            update_display(t)
+            what_turn()
+            update_display("")
 
 
        
 
 
-def what_turn() -> str:
+def what_turn():
     directions = get_available_directions()
     
     display.fill(0)
     dir = select_turn(directions[0], directions[1], directions[2])
     turn(dir)
-    return dir
+
 
 def turn(dir: str):
     initial_count = encoders.get_counts()
@@ -264,7 +264,10 @@ def get_available_directions():
 
     line = line_sensors.read_calibrated()[:]
 
-    if (int(line[1]) > threshold) and (int(line[2]) > threshold) and (int(line[3]) > threshold):
+    ## This could cause issues, we are trying to evaluate if the line ahead is straight...ish 
+    if (int(line[1]) > threshold) and (int(line[2]) > threshold):
+        straight_dir = True
+    elif (int(line[2]) > threshold) and (int(line[3]) > threshold):
         straight_dir = True
 
     directions = [left_dir, right_dir, straight_dir]
@@ -273,6 +276,7 @@ def get_available_directions():
     return directions
 
 
+#This really slows things down, and usually gets a lot wrong!
 def log_to_file(message, filename="logfile.txt"):
     kb_free = gc.mem_free() / 1024
     kb_used = gc.mem_alloc() / 1024
