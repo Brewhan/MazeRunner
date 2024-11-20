@@ -26,7 +26,7 @@ encoder_count = encoders.get_counts()
 button_a = robot.ButtonA()
 
 	
-max_speed = 1000
+max_speed = 600
 turn_speed = 1000
 calibration_speed = 1000
 calibration_count = 100
@@ -44,13 +44,16 @@ display.show()
 while not button_a.check():
     pass
 
-def update_display():
+
+
+def update_display(message):
+    global prev_message
     display.fill(0)
     display.text("Maze Solver", 0, 0)
-
-    ms = (t2 - t1)/1000
-    display.text(f"Main loop: {ms:.1f}ms", 0, 20)
-    display.text(f'p = {str(p)},  pd = {str(power_difference)}', 0, 30)
+    prev_message = message
+    #ms = (t2 - t1)/1000
+    #display.text(f"Main loop: {ms:.1f}ms", 0, 20)
+    display.text(f'{prev_message}', 0, 20)
     # display.text('pd = '+str(power_difference), 0, 40)
 
     # 64-40 = 24
@@ -96,7 +99,8 @@ line = []
 starting = False
 run_motors = False
 last_update_ms = 0
-power_difference = 0 
+power_difference = 0
+prev_message = None 
 
 def straight_until_intersection() -> bool:
     display.fill(0)
@@ -109,8 +113,7 @@ def straight_until_intersection() -> bool:
         # save a COPY of the line sensor data in a global variable
         # to allow the other thread to read it safely.
         line = line_sensors.read_calibrated()[:]
-
-        update_display()
+        update_display(prev_message)
         line_sensors.start_read()
         t1 = t2
         t2 = time.ticks_us()
@@ -131,7 +134,8 @@ def straight_until_intersection() -> bool:
         d = p - last_p
         integral += p
         last_p = p
-        power_difference = p / 20 + integral / 10000 + d * 3 / 2
+        denominator = 10 #decreasing this increases the magnitude of the power_difference - makes turns sharper
+        power_difference = (p / denominator + integral / 10000 + d * 3 / 2) 
 
         if(power_difference > max_speed):
             power_difference = max_speed
@@ -147,22 +151,23 @@ def straight_until_intersection() -> bool:
         
 
         if is_maze_end(): end()
-        elif int(line[0]) < 200 & int(line[1]) < 200 & int(line[2]) < 200 & int(line[3]) < 200 & int(line[4]) < 200:
+        elif int(line[1]) < 200 & int(line[2]) < 200 & int(line[3]) < 200:
             #dead end
             motors.set_speeds(0,0)
-            time.sleep_ms(1000)
-            what_turn()
+            update_display(what_turn())
         elif int(line[0]) > 200 or int(line[4]) > 200:
             #left or right turn available
             motors.set_speeds(0,0)
-            what_turn()
+            update_display(what_turn())
 
-def what_turn():
+
+def what_turn() -> str:
     directions = get_available_directions()
     
     display.fill(0)
     dir = select_turn(directions[0], directions[1], directions[2])
     turn(dir)
+    return dir
 
 def turn(dir: str):
     initial_count = encoders.get_counts()
@@ -239,14 +244,17 @@ def get_available_directions():
         
 
     #line up with intersection to check for straight line
-    motors.set_speeds(500,500)
-    while not (encoders.get_counts()[0] >= initial_count[0] + int(encorder_count_forward) and encoders.get_counts()[1] >= initial_count[1] + int(encorder_count_forward)):
-        pass
-    motors.set_speeds(0, 0)
+    if int(line[0]) < 200 & int(line[1]) < 200 & int(line[2]) < 200 & int(line[3]) < 200 & int(line[4] < 200):
+        motors.set_speeds(0,0)
+    else:
+        motors.set_speeds(500,500)
+        while not (encoders.get_counts()[0] >= initial_count[0] + int(encorder_count_forward) and encoders.get_counts()[1] >= initial_count[1] + int(encorder_count_forward)):
+            pass
+        motors.set_speeds(0, 0)
 
     line = line_sensors.read_calibrated()[:]
 
-    if int(line[1]) + int(line[2]) + int(line[3]) > threshold+100:
+    if int(line[1]) > threshold and int(line[2]) > threshold and int(line[3]) > threshold:
         straight_dir = True
 
     directions = [left_dir, right_dir, straight_dir]
