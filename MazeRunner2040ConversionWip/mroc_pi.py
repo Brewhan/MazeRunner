@@ -30,7 +30,7 @@ max_speed = 600
 turn_speed = 1000
 calibration_speed = 1000
 calibration_count = 100
-encoder_count_max = 195
+encoder_count_max = 220
 encorder_count_forward = 100
 sensor_threshold = 300
 
@@ -147,18 +147,27 @@ def straight_until_intersection() -> bool:
         else:
             motors.set_speeds(max_speed, max_speed-power_difference)
         
-        line = line_sensors.read_calibrated()[:]
+        #line = line_sensors.read_calibrated()[:]
         
+        
+        if is_maze_end():
+            end()
 
-        if is_maze_end(): end()
-        elif int(line[1]) < 200 & int(line[2]) < 200 & int(line[3]) < 200:
+        elif (int(line[1]) < 200) and (int(line[2]) < 200) and (int(line[3]) < 200):
             #dead end
             motors.set_speeds(0,0)
-            update_display(what_turn())
-        elif int(line[0]) > 200 or int(line[4]) > 200:
-            #left or right turn available
+            t = "B"
+            turn(t)
+            update_display(t)
+
+
+        elif (int(line[0]) > 200) or (int(line[4]) > 200):
             motors.set_speeds(0,0)
-            update_display(what_turn())
+            t = what_turn()
+            update_display(t)
+
+
+       
 
 
 def what_turn() -> str:
@@ -190,16 +199,19 @@ def turn(dir: str):
         pass
         # Straight - no specific encoder count adjustment needed here
 
+
     elif dir == "B":
 
         motors.set_speeds(-turn_speed, turn_speed)
         # Wait until the robot has turned approximately 180 degrees
-        while not (encoders.get_counts()[0] <= initial_count[0] - (int(encoder_count_max)*2) and encoders.get_counts()[1] >= initial_count[1] + (int(encoder_count_max)*2)):
+        while not ((encoders.get_counts()[0] <= initial_count[0] - (int(encoder_count_max)*2)) and (encoders.get_counts()[1] >= initial_count[1] + (int(encoder_count_max)*2))):
             pass
         motors.set_speeds(0, 0)
 
     else:
-        pass
+        turn("L")
+        turn("L")
+
     time.sleep_ms(1000)
 
 
@@ -244,17 +256,15 @@ def get_available_directions():
         
 
     #line up with intersection to check for straight line
-    if int(line[0]) < 200 & int(line[1]) < 200 & int(line[2]) < 200 & int(line[3]) < 200 & int(line[4] < 200):
-        motors.set_speeds(0,0)
-    else:
-        motors.set_speeds(500,500)
-        while not (encoders.get_counts()[0] >= initial_count[0] + int(encorder_count_forward) and encoders.get_counts()[1] >= initial_count[1] + int(encorder_count_forward)):
-            pass
-        motors.set_speeds(0, 0)
+
+    motors.set_speeds(500,500)
+    while not (encoders.get_counts()[0] >= initial_count[0] + int(encorder_count_forward) and encoders.get_counts()[1] >= initial_count[1] + int(encorder_count_forward)):
+        pass
+    motors.set_speeds(0, 0)
 
     line = line_sensors.read_calibrated()[:]
 
-    if int(line[1]) > threshold and int(line[2]) > threshold and int(line[3]) > threshold:
+    if (int(line[1]) > threshold) and (int(line[2]) > threshold) and (int(line[3]) > threshold):
         straight_dir = True
 
     directions = [left_dir, right_dir, straight_dir]
