@@ -31,7 +31,7 @@ turn_speed = 1000
 calibration_speed = 1000
 calibration_count = 100
 encoder_count_max = 220
-encorder_count_forward = 100
+encorder_count_forward = 120
 sensor_threshold = 300
 
 display.fill(0)
@@ -97,7 +97,7 @@ t2 = time.ticks_us()
 p = 0
 line = []
 starting = False
-run_motors = False
+run_motors = True
 last_update_ms = 0
 power_difference = 0
 prev_message = None 
@@ -108,8 +108,8 @@ def straight_until_intersection() -> bool:
 
     last_p = 0
     global p, ir, t1, t2, line, max_speed, run_motors, encoder_count
-    run_motors = True
-    while True:
+    #run_motors = True
+    while run_motors:
         # save a COPY of the line sensor data in a global variable
         # to allow the other thread to read it safely.
         line = line_sensors.read_calibrated()[:]
@@ -151,9 +151,11 @@ def straight_until_intersection() -> bool:
         
         
         if is_maze_end():
+            update_display("End")
             end()
+            break
 
-        elif (int(line[1]) < 200) and (int(line[2]) < 200) and (int(line[3]) < 200):
+        elif (int(line[1]) < 100) and (int(line[2]) < 100) and (int(line[3]) < 100):
             #dead end
             motors.set_speeds(0,0)
 
@@ -161,7 +163,7 @@ def straight_until_intersection() -> bool:
             update_display("")
 
 
-        elif (int(line[0]) > 200) or (int(line[4]) > 200):
+        elif (int(line[0]) > 150) or (int(line[4]) > 150):
             motors.set_speeds(0,0)
             what_turn()
             update_display("")
@@ -227,10 +229,12 @@ def select_turn(found_left: bool, found_right: bool, found_straight: bool):
 
 def is_maze_end():
     line = line_sensors.read_calibrated()[:]
-    return int(line[0]) > 600 & int(line[1]) > 600 & int(line[2]) > 600 & int(line[3]) > 600 & int(line[4]) > 600
+    return (int(line[0]) > 600) and (int(line[1]) > 600) and (int(line[2]) > 600) and (int(line[3]) > 600) and (int(line[4]) > 600)
 
 def end():
-    pass
+    motors.off()
+    global run_motors
+    run_motors = False
 
 
 def get_available_directions():
@@ -287,7 +291,7 @@ def log_to_file(message, filename="logfile.txt"):
 
 
 
-while True:
+while run_motors:
     encoder_count = encoders.get_counts()
     #c[0] is left, c[1] is right
 
