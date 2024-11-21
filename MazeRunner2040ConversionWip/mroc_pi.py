@@ -27,12 +27,13 @@ button_a = robot.ButtonA()
 
 	
 max_speed = 600
-turn_speed = 1000
+turn_speed = 900
 calibration_speed = 1000
 calibration_count = 100
 encoder_count_max = 220
 encorder_count_forward = 120
-sensor_threshold = 300
+sensor_threshold = 150
+
 
 display.fill(0)
 display.text("Line Follower", 0, 0)
@@ -50,10 +51,12 @@ def update_display(message):
     global prev_message
     display.fill(0)
     display.text("Maze Solver", 0, 0)
+    display.text(f"L:{line[0]},R:{line[4]}", 0, 10)
+    display.text(f"S:{line[1]},{line[2]},{line[3]}", 0, 20)
     prev_message = message
     #ms = (t2 - t1)/1000
     #display.text(f"Main loop: {ms:.1f}ms", 0, 20)
-    display.text(f'{prev_message}', 0, 20)
+    #display.text(f'{prev_message}', 0, 20)
     # display.text('pd = '+str(power_difference), 0, 40)
 
     # 64-40 = 24
@@ -163,7 +166,7 @@ def straight_until_intersection() -> bool:
             update_display("")
 
 
-        elif (int(line[0]) > 150) or (int(line[4]) > 150):
+        elif (int(line[0]) > sensor_threshold) or (int(line[4]) > sensor_threshold):
             motors.set_speeds(0,0)
             what_turn()
             update_display("")
@@ -229,7 +232,7 @@ def select_turn(found_left: bool, found_right: bool, found_straight: bool):
 
 def is_maze_end():
     line = line_sensors.read_calibrated()[:]
-    return (int(line[0]) > 600) and (int(line[1]) > 600) and (int(line[2]) > 600) and (int(line[3]) > 600) and (int(line[4]) > 600)
+    return ((int(line[0]) > 300) and (int(line[1]) > 600) and (int(line[2]) > 600) and (int(line[3]) > 600) and (int(line[4]) > 300))
 
 def end():
     motors.off()
@@ -241,7 +244,6 @@ def get_available_directions():
     display.fill(0)
     initial_count = encoders.get_counts()
 
-    threshold = 200
     try:
         line = line_sensors.read_calibrated()[:]
     except Exception as e:
@@ -251,11 +253,11 @@ def get_available_directions():
     right_dir = False
     straight_dir = False
 
-    if int(line[0]) > threshold:
+    if int(line[0]) > sensor_threshold:
         left_dir = True
         encoders
                   
-    if int(line[4]) > threshold: 
+    if int(line[4]) > sensor_threshold: 
         right_dir = True
         
 
@@ -269,9 +271,9 @@ def get_available_directions():
     line = line_sensors.read_calibrated()[:]
 
     ## This could cause issues, we are trying to evaluate if the line ahead is straight...ish 
-    if (int(line[1]) > threshold) and (int(line[2]) > threshold):
+    if (int(line[1]) > sensor_threshold) and (int(line[2]) > sensor_threshold):
         straight_dir = True
-    elif (int(line[2]) > threshold) and (int(line[3]) > threshold):
+    elif (int(line[2]) > sensor_threshold) and (int(line[3]) > sensor_threshold):
         straight_dir = True
 
     directions = [left_dir, right_dir, straight_dir]
