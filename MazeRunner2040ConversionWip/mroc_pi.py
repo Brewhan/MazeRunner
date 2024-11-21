@@ -50,7 +50,7 @@ while not button_a.check():
 def update_display(message):
     global prev_message
     display.fill(0)
-    display.text("Maze Solver", 0, 0)
+    display.text(f"M:{message}", 0, 0)
     display.text(f"L:{line[0]},R:{line[4]}", 0, 10)
     display.text(f"S:{line[1]},{line[2]},{line[3]}", 0, 20)
     prev_message = message
@@ -295,6 +295,14 @@ def log_to_file(message, filename="logfile.txt"):
 
 while run_motors:
     encoder_count = encoders.get_counts()
+    if run_motors == True:
+        update_display("Running...")
     #c[0] is left, c[1] is right
-
     straight_until_intersection()
+
+
+
+while True:
+    line = line_sensors.read_calibrated()[:]
+    update_display("End")
+
