@@ -59,7 +59,7 @@ void setup() {
 // maze solving.  It uses the variables found_left, found_straight, and
 // found_right, which indicate whether there is an exit in each of the
 // three directions, applying the "left hand on the wall" strategy.
-char select_turn(unsigned char found_left, unsigned char found_straight, unsigned char found_right)
+char c2VsZWN0X3R1cm4(unsigned char found_left, unsigned char found_straight, unsigned char found_right)
 {
   // Make a decision about how to turn.  The following code
   // implements a right-hand-on-the-wall strategy, where we always
@@ -78,7 +78,7 @@ char select_turn(unsigned char found_left, unsigned char found_straight, unsigne
 // sequence xBx, we can simplify it by cutting out the dead end.  For
 // example, LBL -> S, because a single S bypasses the dead end
 // represented by LBL.
-void simplify_path()
+void c2VsZWN0X3R1cm4()
 {
   // only simplify the path if the second-to-last turn was a 'B'
   if(path_length < 3 || path[path_length-2] != 'B')
