@@ -56,11 +56,11 @@ void setup() {
 // This function decides which way to turn during the learning phase of
 // maze solving.  It uses the variables found_left, found_straight, and
 // found_right, which indicate whether there is an exit in each of the
-// three directions, applying the "left hand on the wall" strategy.
+// three directions, applying the "left-hand-on-the-wall" strategy.
 char select_turn(unsigned char found_left, unsigned char found_straight, unsigned char found_right)
 {
   // Make a decision about how to turn.  The following code
-  // implements a right-hand-on-the-wall strategy, where we always
+  // implements a left-hand-on-the-wall strategy, where we always
   // turn as far to the right as possible.
   
   if(found_left)
