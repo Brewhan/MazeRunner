@@ -61,7 +61,7 @@ char select_turn(unsigned char found_left, unsigned char found_straight, unsigne
 {
   // Make a decision about how to turn.  The following code
   // implements a left-hand-on-the-wall strategy, where we always
-  // turn as far to the right as possible.
+  // turn as far to the left as possible.
   
   if(found_left)
   return 'L';
